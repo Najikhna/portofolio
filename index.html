@@ -3,770 +3,711 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Najikh - Fresh Graduate TKJ</title>
+    <meta name="description" content="Portofolio Najikh - Network Technician & Web Developer">
     
+    <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/code.png">
+    
+    <title>Najikh | Network & Web Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 1. SETTING DASAR --- */
+        /* --- 1. RESET & VARIABLES --- */
         :root {
-            --primary-blue: #0056b3;
-            --secondary-blue: #00a8ff;
-            --gradient-bg: linear-gradient(135deg, #0061ff 0%, #60efff 100%);
-            --text-color: #333;
-            --bg-color: #f4f7f6;
+            --primary: #2563eb;       /* Biru Utama */
+            --primary-dark: #1e40af;  /* Biru Gelap Hover */
+            --dark: #0f172a;          /* Teks Gelap */
+            --light: #f8fafc;         /* Background */
+            --gray: #64748b;          /* Teks Abu */
             --white: #ffffff;
-            --shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        html {
-            scroll-behavior: smooth;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Hapus blok biru saat tap di HP */
+            text-decoration: none;
+            list-style: none;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Jarak agar judul tidak ketutup header saat di-klik */
         }
 
         body {
-            color: var(--text-color);
-            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        section {
-            padding: 90px 0;
-        }
-
-        /* --- 2. NAVBAR (POJOK KANAN KIRI) --- */
-        .navbar {
+        /* --- 2. HEADER & NAV (GLASSMORPHISM) --- */
+        header {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.85); /* Transparan */
+            backdrop-filter: blur(12px); /* Efek Blur Kaca */
             z-index: 1000;
-            padding: 15px 40px; /* Padding samping diperbesar agar tidak terlalu mepet */
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 15px 5%;
+            transition: 0.3s;
+        }
+
+        nav {
             display: flex;
-            justify-content: space-between; /* KUNCI: Logo kiri, Menu kanan, Tengah kosong */
+            justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none; /* Hilangkan garis bawah link */
-            cursor: pointer;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .nav-links {
-            list-style: none;
             display: flex;
             gap: 30px;
         }
 
         .nav-links a {
-            text-decoration: none;
-            color: #333;
+            color: var(--dark);
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            text-transform: uppercase;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--primary-blue);
+            color: var(--primary);
         }
 
+        /* Garis bawah animasi pada menu */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu */
         .hamburger {
             display: none;
-            font-size: 1.5rem;
             cursor: pointer;
-            color: var(--primary-blue);
+            z-index: 1001;
         }
 
-        /* --- 3. HERO SECTION (PEMBUKA) --- */
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 5px 0;
+            transition: 0.4s;
+            border-radius: 5px;
+        }
+
+        /* --- 3. HERO SECTION --- */
         .hero {
             min-height: 100vh;
-            background: var(--gradient-bg);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--white);
-            padding-top: 80px;
-            position: relative;
-            border-bottom-left-radius: 50% 10%;
-            border-bottom-right-radius: 50% 10%;
+            padding: 100px 20px 0;
+            background: radial-gradient(circle at 10% 20%, rgb(224, 242, 254) 0%, rgb(255, 255, 255) 90%);
         }
 
-        .profile-img-container {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            border: 5px solid rgba(255, 255, 255, 0.8);
-            overflow: hidden;
-            background-color: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 800;
         }
 
-        .profile-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-
-        .btn-cta {
+        .hero-content h1 span {
+            color: var(--primary);
             display: inline-block;
-            padding: 12px 35px;
-            background-color: var(--white);
-            color: var(--primary-blue);
-            text-decoration: none;
-            border-radius: 30px;
+        }
+
+        .hero-content p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
-        .btn-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
         }
 
-        .note-kecil {
-            font-size: 0.75rem;
-            margin-top: 10px;
-            opacity: 0.8;
+        /* --- 4. SECTIONS & LAYOUT --- */
+        section {
+            padding: 80px 5%;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        /* --- 4. TITLE STYLE --- */
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
             font-size: 2.2rem;
-            color: var(--primary-blue);
-            position: relative;
+            margin-bottom: 3rem;
             font-weight: 700;
+            position: relative;
+            color: var(--dark);
         }
 
+        /* Garis hiasan di bawah judul */
         .section-title::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 60px;
             height: 4px;
-            background: var(--gradient-bg);
-            margin: 10px auto;
+            background: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 10px;
+        }
+
+        /* --- 5. ABOUT (Rata Kanan Kiri) --- */
+        .about-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: justify; /* Requirement: Rata Kanan Kiri */
+            color: var(--gray);
+            line-height: 1.8;
+            border-left: 5px solid var(--primary);
+        }
+
+        /* --- 6. EXPERIENCE (Timeline Akar/Pohon) --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Garis Akar Utama */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px; /* Posisi garis vertikal */
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #e2e8f0;
             border-radius: 2px;
         }
 
-        /* --- 5. ABOUT --- */
-        .about-content {
-            text-align: center;
-            max-width: 800px;
-            margin: auto;
-            line-height: 1.8;
-            font-size: 1.1rem;
-            color: #555;
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 60px; /* Jarak teks dari garis */
         }
 
-        /* --- 6. SKILLS --- */
-        .skills-section { background-color: white; }
-        .skills-wrapper { max-width: 700px; margin: auto; }
+        /* Lingkaran pada Akar */
+        .timeline-dot {
+            position: absolute;
+            left: 10px; /* (20px garis / 2) - (24px dot / 2) + offset */
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--white);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(5px);
+        }
+
+        .time-badge {
+            background: #e0f2fe;
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .timeline h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* --- 7. SKILLS (Icons Modern) --- */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+        }
 
         .skill-box {
-            margin-bottom: 25px;
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            border: 1px solid transparent;
         }
 
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #444;
+        .skill-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
         }
 
-        .skill-bar {
-            height: 12px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
+        .skill-box i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
 
-        .skill-fill {
-            height: 100%;
-            background: var(--gradient-bg);
-            border-radius: 10px;
-            width: 0%;
-            transition: width 1.5s ease-in-out;
+        .skill-box h4 {
+            font-size: 1rem;
+            color: var(--dark);
         }
 
-        /* --- 7. SERTIFIKAT (GRID & MODAL) --- */
-        .cert-grid {
+        /* --- 8. PROJECTS (GitHub & Lazy Load) --- */
+        .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .cert-item {
+        .project-card {
             background: var(--white);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
-            cursor: pointer; /* Menandakan bisa diklik */
-        }
-
-        .cert-item:hover { transform: translateY(-10px); }
-
-        .cert-img {
-            height: 220px;
-            background-color: #ddd;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .cert-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.5s;
-        }
-
-        /* Icon mata (view) saat hover */
-        .cert-img::after {
-            content: '\f06e'; /* FontAwesome Eye Icon */
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 2rem;
-            opacity: 0;
-            transition: 0.3s;
-            pointer-events: none;
-        }
-
-        .cert-item:hover .cert-img::after { opacity: 1; }
-        .cert-item:hover .cert-img img { transform: scale(1.1); filter: brightness(0.7); }
-
-        .cert-info { padding: 25px; text-align: center; }
-        .cert-info h3 { font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 5px; }
-        .cert-info p { color: #777; font-size: 0.9rem; }
-
-        /* MODAL (UNTUK MEMBESARKAN GAMBAR) */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 9999; 
-            left: 0; top: 0;
-            width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.9); 
-            overflow: auto;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 900px;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-            animation: zoom 0.6s;
-        }
-
-        @keyframes zoom {
-            from {transform:scale(0)} 
-            to {transform:scale(1)}
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .close-modal:hover,
-        .close-modal:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* --- 8. PENGALAMAN --- */
-        .experience-section { background-color: white; }
-
-        .timeline {
-            max-width: 800px;
-            margin: auto;
-            border-left: 3px solid var(--primary-blue);
-            padding-left: 40px;
-            position: relative;
-        }
-
-        .exp-item {
-            margin-bottom: 40px;
-            position: relative;
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-
-        .exp-item::before {
-            content: '';
-            width: 20px;
-            height: 20px;
-            background: var(--secondary-blue);
-            border-radius: 50%;
-            position: absolute;
-            left: -51px;
-            top: 25px;
-            border: 4px solid white;
-            box-shadow: 0 0 0 2px var(--primary-blue);
-        }
-
-        .exp-date {
-            color: var(--primary-blue);
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            display: inline-block;
-            background: #e3f2fd;
-            padding: 2px 10px;
-            border-radius: 5px;
-        }
-        
-        .exp-item h3 { margin-bottom: 5px; color: #333; }
-        .exp-item h4 { font-size: 0.95rem; color: #666; font-style: italic; margin-bottom: 10px; }
-        .exp-item ul { list-style-position: inside; color: #555; margin-top: 10px; }
-        .exp-item ul li { margin-bottom: 5px; }
-
-        /* --- 9. KONTAK --- */
-        .contact-section {
-            background-color: #f4f7f6;
-            padding-bottom: 100px;
-        }
-
-        .contact-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .social-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            box-shadow: var(--shadow);
-            text-decoration: none;
             transition: 0.3s;
         }
 
-        .social-btn:hover {
-            background: var(--gradient-bg);
-            color: white;
+        .project-card:hover {
             transform: translateY(-5px);
         }
 
-        .form-box {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
+        /* Gambar Project (Lazy Load aktif) */
+        .project-img {
             width: 100%;
-            max-width: 600px;
+            height: 200px;
+            object-fit: cover;
+            background-color: #eee; /* Placeholder warna sebelum gambar muncul */
         }
 
-        .form-title {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #444;
+        .project-info {
+            padding: 25px;
+        }
+
+        .tags span {
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            background: #f1f5f9;
+            border-radius: 5px;
+            color: var(--gray);
+            margin-right: 5px;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            color: var(--primary);
             font-weight: 600;
         }
 
-        .input-group {
+        /* --- 9. CONTACT FORM & SOSMED --- */
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
             margin-bottom: 20px;
         }
 
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary-blue);
-            font-size: 0.9rem;
-        }
-
-        .input-group input, 
-        .input-group textarea {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 15px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-family: inherit;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
             transition: 0.3s;
-            background: #fafafa;
         }
 
-        .input-group input:focus, 
-        .input-group textarea:focus {
-            border-color: var(--secondary-blue);
-            background: white;
-            outline: none;
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: var(--gradient-bg);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--primary);
+            box-shadow: var(--shadow);
             transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 97, 255, 0.3);
         }
 
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 97, 255, 0.4);
+        .social-icons a:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
         }
 
         footer {
-            background: #222;
-            color: #ddd;
             text-align: center;
-            padding: 30px 0;
+            padding: 40px;
+            margin-top: 50px;
+            background: var(--dark);
+            color: #94a3b8;
             font-size: 0.9rem;
         }
 
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
-            .navbar { padding: 15px 20px; } /* Reset padding di HP */
-            .nav-links {
-                position: absolute;
-                top: 70px; right: 0;
-                width: 100%;
-                background: white;
-                flex-direction: column;
-                align-items: center;
-                padding: 30px 0;
-                display: none;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-            .nav-links.active { display: flex; }
+            .hero-content h1 { font-size: 2.5rem; }
+            
             .hamburger { display: block; }
-            .hero h1 { font-size: 2.2rem; }
-            .timeline { padding-left: 20px; border-left: 2px solid var(--primary-blue); }
-            .exp-item::before { left: -31px; width: 16px; height: 16px; top: 20px; }
-            .form-box { padding: 25px; }
+            
+            .nav-links {
+                position: fixed;
+                left: 100%; /* Sembunyi di kanan */
+                top: 0;
+                flex-direction: column;
+                background: var(--white);
+                width: 100%; /* Full screen menu */
+                height: 100vh;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: 0.4s ease-in-out;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+            }
+
+            /* Animasi Hamburger jadi X */
+            .hamburger.active .bar:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
         }
     </style>
 </head>
-<body id="home">
+<body>
 
-    <nav class="navbar">
-        <a href="#home" class="logo">Najikh</a>
-        
-        <ul class="nav-links">
-            <li><a href="#about">Tentang</a></li>
-            <li><a href="#skills">Keahlian</a></li>
-            <li><a href="#certificates">Sertifikat</a></li>
-            <li><a href="#experience">Pengalaman</a></li>
-            <li><a href="#contact">Kontak</a></li>
-        </ul>
-
-        <div class="hamburger">
-            <i class="fas fa-bars"></i>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="container">
-            <div class="profile-img-container">
-                <img src="Gemini_Generated_Image_24nsnm24nsnm24ns.png" alt="Najikh" onerror="this.src='https://via.placeholder.com/200?text=Foto+Najikh'">
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-terminal"></i> Najikh.Dev
             </div>
-            
-            <h1>Halo, Saya Najikh</h1>
-            <p>Fresh Graduate Teknik Komputer & Jaringan (TKJ)</p>
-            
-            <a href="White and Black  Modern New Graduate Professional Resume (1).pdf" download="CV-Najikh.pdf" class="btn-cta">
-                <i class="fas fa-download"></i> Download CV
-            </a>
-        </div>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">Tentang</a></li>
+                <li><a href="#experience" onclick="closeMenu()">Pengalaman</a></li>
+                <li><a href="#skills" onclick="closeMenu()">Skill</a></li>
+                <li><a href="#projects" onclick="closeMenu()">Project</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Kontak</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
     </header>
 
-    <section id="about" class="reveal">
-        <div class="container">
-            <h2 class="section-title">Tentang Saya</h2>
-            <div class="about-content">
-                <p>
-                    Saya adalah lulusan baru SMK jurusan Teknik Komputer dan Jaringan (TKJ) yang memiliki minat besar dalam dunia infrastruktur jaringan dan teknologi internet. 
-                    Berpengalaman dalam instalasi Fiber Optik (FTTH) dan konfigurasi MikroTik selama masa PKL. 
-                    Saya adalah pribadi yang disiplin, cepat belajar, dan siap berkontribusi sebagai teknisi jaringan profesional.
-                </p>
-            </div>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="reveal-top">Halo, Saya <span>Najikh</span></h1>
+            <p class="reveal-bottom">Network Technician & Web Enthusiast. Mengubah kabel menjadi koneksi, dan kode menjadi solusi.</p>
+            <a href="#experience" class="btn reveal-bottom">Lihat Perjalanan Saya</a>
         </div>
     </section>
 
-    <section id="skills" class="skills-section reveal">
-        <div class="container">
-            <h2 class="section-title">Keahlian Teknis</h2>
-            <div class="skills-wrapper">
-                
-                <div class="skill-box">
-                    <div class="skill-info"><span>FTTH (Fiber To The Home)</span><span>90%</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-info"><span>Bongkar Pasang Komputer/PC</span><span>80%</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-info"><span>MikroTik Configuration</span><span>75%</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
-                </div>
-
-                <div class="skill-box">
-                    <div class="skill-info"><span>Maintenance Jaringan</span><span>70%</span></div>
-                    <div class="skill-bar"><div class="skill-fill" style="width: 70%"></div></div>
-                </div>
-
-            </div>
+    <section id="about">
+        <h2 class="section-title reveal-top">Tentang Saya</h2>
+        <div class="about-card reveal-bottom">
+            <p>
+                Saya adalah seorang profesional muda yang berdedikasi dengan latar belakang pendidikan Teknik Komputer dan Jaringan (TKJ). 
+                Memiliki ketertarikan mendalam pada dunia teknologi, khususnya infrastruktur jaringan dan pengembangan web dasar. 
+                Selain memiliki keahlian teknis dalam konfigurasi MikroTik dan manajemen FTTH, saya juga memiliki jiwa sosial yang tinggi 
+                dan pengalaman kerja dalam pelayanan pelanggan yang melatih kedisiplinan dan komunikasi saya.
+            </p>
         </div>
     </section>
 
-    <section id="certificates" class="reveal">
-        <div class="container">
-            <h2 class="section-title">Sertifikat</h2>
-            <div class="cert-grid">
-                
-                <div class="cert-item" onclick="openModal(this)">
-                    <div class="cert-img">
-                        <img src="sertifikat-pkl.jpg" alt="Sertifikat PKL" onerror="this.src='https://via.placeholder.com/600x400?text=Sertifikat+PKL'">
-                    </div>
-                    <div class="cert-info">
-                        <h3>Sertifikat PKL</h3>
-                        <p>PT. Gopal Network Solusindo</p>
-                    </div>
-                </div>
-
-                <div class="cert-item" onclick="openModal(this)">
-                    <div class="cert-img">
-                        <img src="sertifikat-kompetensi.jpg" alt="Sertifikat Kompetensi" onerror="this.src='https://via.placeholder.com/600x400?text=Sertifikat+Kompetensi'">
-                    </div>
-                    <div class="cert-info">
-                        <h3>Sertifikat Kompetensi</h3>
-                        <p>LSP / BNSP</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="experience-section reveal">
-        <div class="container">
-            <h2 class="section-title">Pengalaman</h2>
-            <div class="timeline">
-                
-                <div class="exp-item">
-                    <div class="exp-date">15 Juli 2025 - 15 Desember 2025</div>
-                    <h3>Praktik Kerja Lapangan (PKL)</h3>
-                    <h4>PT. Gopal Network Solusindo</h4>
-                    <p>Melakukan instalasi dan pemeliharaan jaringan internet berbasis Fiber Optik dan Wireless.</p>
-                    <ul>
-                        <li>Melakukan penyambungan kabel fiber optik (Splicing) untuk pelanggan baru (FTTH).</li>
-                        <li>Setting dan konfigurasi dasar perangkat MikroTik dan Modem ONT.</li>
-                        <li>Troubleshooting gangguan jaringan di sisi pelanggan (Client Side).</li>
-                        <li>Maintenance rutin infrastruktur jaringan wilayah operasional.</li>
-                    </ul>
-                </div>
-
-                <div class="exp-item">
-                    <div class="exp-date">2023 - 2025</div>
-                    <h3>Wakil Ketua</h3>
-                    <h4>Ekstrakurikuler KIT (Karya Ilmiah Teknologi)</h4>
-                    <p>Aktif dalam riset dan pengembangan inovasi teknologi tepat guna di lingkungan sekolah.</p>
-                    <ul>
-                        <li>Belajar merakit komponen elektronika dasar dan IoT sederhana.</li>
-                        <li>Mempersiapkan materi dan demo untuk pameran teknologi sekolah.</li>
-                        <li>Melatih kemampuan problem solving dan berpikir kritis melalui riset ilmiah.</li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact-section reveal">
-        <div class="container contact-container">
-            <h2 class="section-title">Hubungi Saya</h2>
+    <section id="experience">
+        <h2 class="section-title reveal-top">Pengalaman</h2>
+        <div class="timeline">
             
-            <div class="social-links">
-                <a href="https://instagram.com/najikh_zz" target="_blank" class="social-btn" title="Instagram: @najikh_zz">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                
-                <a href="https://wa.me/6285808768241" target="_blank" class="social-btn" title="WhatsApp: 085808768241">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                
-                <a href="https://facebook.com/profile.php?id=100057235748767" target="_blank" class="social-btn" title="Facebook: Na Zam">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
+            <div class="timeline-item reveal-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="time-badge">Juli 2025 - Des 2025</span>
+                    <h3>PKL - Network Technician</h3>
+                    <p><strong>PT. Gopal Network Solusindo</strong></p>
+                    <p style="margin-top:10px; font-size: 0.95rem;">Menangani instalasi jaringan Fiber Optic (FTTH) ke rumah pelanggan, splicing kabel optik, troubleshooting gangguan sinyal, dan konfigurasi dasar router MikroTik.</p>
+                </div>
             </div>
 
-            <div class="form-box">
-                <h3 class="form-title">Kirim Pesan ke Email Saya</h3>
+            <div class="timeline-item reveal-right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="time-badge">2023 - Sekarang</span>
+                    <h3>Waiter Professional</h3>
+                    <p><strong>Freelance / Part-time</strong></p>
+                    <p style="margin-top:10px; font-size: 0.95rem;">Melayani pelanggan dengan ramah, manajemen pesanan di jam sibuk, dan menjaga kebersihan area kerja. Melatih soft-skill komunikasi dan kesabaran.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal-left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="time-badge">2020 - 2023</span>
+                    <h3>Anggota Aktif PMR</h3>
+                    <p><strong>SMP (Palang Merah Remaja)</strong></p>
+                    <p style="margin-top:10px; font-size: 0.95rem;">Aktif dalam tim pertolongan pertama sekolah, mengikuti bakti sosial, dan mempelajari dasar-dasar kepemimpinan serta kemanusiaan sejak dini.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title reveal-top">Keahlian Teknis</h2>
+        <div class="skills-container">
+            <div class="skill-box reveal-bottom">
+                <i class="fas fa-network-wired"></i>
+                <h4>FTTH & Fiber Optic</h4>
+            </div>
+            <div class="skill-box reveal-bottom" style="transition-delay: 100ms;">
+                <i class="fas fa-server"></i>
+                <h4>MikroTik Config</h4>
+            </div>
+            <div class="skill-box reveal-bottom" style="transition-delay: 200ms;">
+                <i class="fab fa-html5"></i>
+                <h4>HTML & CSS</h4>
+            </div>
+            <div class="skill-box reveal-bottom" style="transition-delay: 300ms;">
+                <i class="fas fa-tools"></i>
+                <h4>Troubleshooting PC</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title reveal-top">Project Terbaru</h2>
+        <div class="project-grid">
+            
+            <div class="project-card reveal-left">
+                <img src="https://via.placeholder.com/500x300/2563eb/ffffff?text=Comic+App+Database" alt="Aplikasi Komik" class="project-img" loading="lazy">
+                <div class="project-info">
+                    <h3>Aplikasi Database Komik</h3>
+                    <p style="margin-bottom: 15px;">Aplikasi berbasis web untuk katalogisasi koleksi komik pribadi dengan fitur pencarian cepat.</p>
+                    <div class="tags">
+                        <span>JavaScript</span>
+                        <span>Firebase</span>
+                    </div>
+                    <a href="https://github.com/najikh/comic-app" class="github-link"><i class="fab fa-github"></i> Lihat Code</a>
+                </div>
+            </div>
+
+            <div class="project-card reveal-right">
+                <img src="https://via.placeholder.com/500x300/1e40af/ffffff?text=Web+Portfolio" alt="Web Portofolio" class="project-img" loading="lazy">
+                <div class="project-info">
+                    <h3>Personal Landing Page</h3>
+                    <p style="margin-bottom: 15px;">Website portofolio yang kamu lihat ini. Dibangun dengan prinsip modern UI dan animasi smooth.</p>
+                    <div class="tags">
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>ScrollReveal</span>
+                    </div>
+                    <a href="#" class="github-link"><i class="fab fa-github"></i> Lihat Code</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title reveal-top">Hubungi Saya</h2>
+        <div class="contact-wrapper">
+            
+            <form class="contact-form reveal-left" id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Kamu" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Pesan..." required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Kirim Pesan</button>
+            </form>
+
+            <div class="reveal-right" style="display: flex; flex-direction: column; justify-content: center;">
+                <h3 style="margin-bottom: 10px;">Mari Terhubung!</h3>
+                <p>Saya terbuka untuk kesempatan kerja atau diskusi proyek.</p>
                 
-                <form action="https://formspree.io/f/mnjbjdeg" method="POST">
-                    
-                    <div class="input-group">
-                        <label>Email Kamu</label>
-                        <input type="email" name="email" placeholder="nama@email.com" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Pesan</label>
-                        <textarea name="message" rows="5" placeholder="Tulis pesan untuk Najikh..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-paper-plane"></i> Kirim Sekarang
-                    </button>
-                </form>
+                <div class="social-icons">
+                    <a href="https://wa.me/6285808768241" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/najikh_zz" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/in/najikh" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
             </div>
 
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Najikh Portfolio. Dibuat dengan semangat TKJ.</p>
+        <p>&copy; 2026 Najikh Portfolio. Dibuat dengan sepenuh hati.</p>
     </footer>
 
-    <div id="myModal" class="modal" onclick="closeModal()">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="modalImg">
-    </div>
-
+    <script src="https://unpkg.com/scrollreveal"></script>
+    
     <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+        // --- 1. Konfigurasi ScrollReveal (Animasi Masuk) ---
+        const sr = ScrollReveal({
+            origin: 'bottom',
+            distance: '60px',
+            duration: 1000,
+            delay: 100,
+            reset: false // Set false agar animasi hanya sekali (lebih profesional)
+        });
 
-        hamburger.addEventListener('click', () => {
+        sr.reveal('.reveal-top', { origin: 'top' });
+        sr.reveal('.reveal-bottom', { interval: 100 });
+        sr.reveal('.reveal-left', { origin: 'left' });
+        sr.reveal('.reveal-right', { origin: 'right' });
+
+
+        // --- 2. Logic Hamburger Menu (Mobile) ---
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
-        });
+        }
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
+        function closeMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            // Hanya jalankan jika menu sedang terbuka
+            if (navLinks.classList.contains('active')) {
+                hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
-            });
-        });
-
-        // FUNGSI MODAL GAMBAR
-        function openModal(element) {
-            var modal = document.getElementById("myModal");
-            var modalImg = document.getElementById("modalImg");
-            
-            // Mengambil source gambar dari elemen img di dalam div yang diklik
-            var imgSource = element.querySelector('img').src;
-            
-            modal.style.display = "flex"; // Gunakan flex agar gambar di tengah
-            modalImg.src = imgSource;
-        }
-
-        function closeModal() {
-            var modal = document.getElementById("myModal");
-            modal.style.display = "none";
-        }
-
-        // ANIMASI SCROLL
-        window.addEventListener('scroll', reveal);
-
-        function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
-            var windowHeight = window.innerHeight;
-            var elementVisible = 100;
-
-            for (var i = 0; i < reveals.length; i++) {
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
-                    if (reveals[i].classList.contains('skills-section')) {
-                        var skills = document.querySelectorAll('.skill-fill');
-                        skills.forEach(skill => {
-                            var width = skill.getAttribute('style').split(':')[1];
-                            skill.style.width = width;
-                        });
-                    }
-                }
             }
         }
-        
-        reveal();
+
+        // --- 3. Simulasi Kirim Pesan (Agar form terasa hidup) ---
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah refresh halaman
+            
+            const btn = this.querySelector('button');
+            const originalText = btn.innerText;
+            
+            // Ubah tombol jadi loading
+            btn.innerText = 'Mengirim...';
+            btn.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                alert('Pesan berhasil terkirim! (Ini hanya simulasi demo)');
+                btn.innerText = originalText;
+                btn.style.opacity = '1';
+                this.reset(); // Kosongkan form
+            }, 1500);
+        });
     </script>
 </body>
 </html>
